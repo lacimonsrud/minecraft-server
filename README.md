@@ -48,7 +48,7 @@ Next, use `cd ansible` to enter the ansible directory
 The first thing you will want to do is use `vim hosts` 
 
 Here you will add a new line, using the template: 
-'SERVER_IP ansible_user=ec2-user ansible_ssh_private_key_file=minecraft_key.pem`
+`SERVER_IP ansible_user=ec2-user ansible_ssh_private_key_file=minecraft_key.pem`
 Tip: Hit i to enter insert mode and when you're done, hit escape then type :wq to save the file
 
 This will link ansible to the EC2 instance you just created using terraform.
