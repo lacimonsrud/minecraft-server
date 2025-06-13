@@ -64,5 +64,17 @@ Now, connect using the IP from terraform and a port of 25565, like this `x.x.x.x
 
 Congrats! You did it! :)
 
+# References
+
+Terraform Documentation: https://developer.hashicorp.com/terraform/docs
+
+Ansible Documentation: https://docs.ansible.com/
+
+AWSCLI Documentation: https://docs.aws.amazon.com/cli/
+
+Help from CS312 Discord Server & CS312 Lab Content 
+
+Help/Ideas from ChatGPT on how to generate private keys and using ansible tasks. 
+
 
 
