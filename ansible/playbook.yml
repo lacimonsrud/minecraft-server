@@ -1,0 +1,53 @@
+---
+- name: Booting Minecraft Server
+  hosts: minecraft
+  gather_facts: no
+  become: true
+  become_method: sudo
+
+  tasks:
+    - name: Installing Python...
+      raw: sudo dnf install python3
+
+    - name: update dnf
+      raw: sudo dnf update -y
+
+    - name: Grabbing Java Install Link...
+      get_url:
+        url: "https://download.oracle.com/java/24/latest/jdk-24_linux-aarch64_bin.rpm"
+        dest: "/tmp/jdk-24_linux-aarch64_bin.rpm"
+
+    - name: Installing Java...
+      dnf:
+        name: "/tmp/jdk-24_linux-aarch64_bin.rpm"
+        state: present
+        disable_gpg_check: yes
+
+    - name: Creating Minecraft Sever Directory...
+      file:
+        path: "/opt/minecraft/server"
+        state: directory
+
+    - name: Grabbing Latest Minecraft Server Jar...
+      get_url:
+        url: "https://piston-data.mojang.com/v1/objects/e6ec2f64e6080b9b5d9b471b291c33cc7f509733/server.jar"
+        dest: "/opt/minecraft/server/server.jar"
+
+    - name: Accepting Minecraft Eula...
+      copy:
+        content: "eula=true"
+        dest: "/opt/minecraft/server/eula.txt"
+
+    - name: Creating systemmd service file...
+      copy:
+        src: systemctl_content.txt
+        dest: /etc/systemd/system/minecraft.service
+
+    - name: Reloading systemmd...
+      command: systemctl daemon-reload
+
+    - name: Enabling Minecraft Service...
+      command: systemctl enable minecraft.service
+
+    - name: Starting Minecraft Service...
+      command: systemctl start minecraft.service
