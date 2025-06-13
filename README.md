@@ -55,6 +55,8 @@ This will link ansible to the EC2 instance you just created using terraform.
 
 Finally, run `ansible-playbook -i hosts playbook.yml`
 
+then type `yes` when prompted
+
 Wait for ansible to run through the tasks
 
 ## Step 4 - Connect!
